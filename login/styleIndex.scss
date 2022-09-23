@@ -1,0 +1,376 @@
+@import url('../pattens/nullstyle.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body{
+    font-family: 'Montserrat';
+}
+
+.underline.active{
+    &::before{
+        position: absolute;
+        content: '';
+        border-bottom: 1px solid rgb(253, 174, 27);
+        transition: all 2s ease 0s;
+    }
+}
+.underline {
+    @media (max-width: 550px) {
+        
+    }
+    &::before{
+        position: absolute;
+        content: '';
+        width: 0px;
+
+    }
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    &::before{
+        content: '';
+        filter: blur(5px);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        width: 100%;
+        min-height: 100%;
+        overflow: hidden;
+        background-image: url('../login/image/background.png');
+        background-size: cover;
+        background-position: right;
+    }
+    & .logo {
+        top: 50px;
+        left: 50px;
+        position: absolute;
+        width: 100px;
+        @media (max-width: 1024px) {
+            display: none;
+        }
+    }
+    & .login{
+
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+        width: 500px;
+        border-radius: 20px;
+        @media (max-width: 1440px) {
+            height: 250px;
+            width: 400px;
+        }
+        @media (max-width: 550px) {
+            width: 300px;
+        }
+        & .login-swich{
+            margin-top: 24px;
+            display: flex;
+            justify-content: space-around;
+            & .login-swich-login{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                & .login-swich-login-button{
+                    background: none;
+                    font-size: 26px;
+                    font-weight: 600;
+                    color: rgb(227, 148, 1);
+                    @media (max-width: 550px) {
+                        font-size: 22px;
+                    }
+                    transition: all 0.5s ease 0s;
+                    &:hover{
+                        color:rgb(250, 174, 33);
+                    }
+                }
+            }
+            & .login-swich-registration{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                & .login-swich-registration-button{
+                    background: none;
+                    font-size: 24px;
+                    color: rgb(227, 148, 1);
+                    font-weight: 600;
+                    @media (max-width: 550px) {
+                        font-size: 20px;
+                    }
+                    transition: all 0.5s ease 0s;
+                    &:hover{
+                        color:rgb(250, 174, 33);
+                    }
+                }
+            }
+        }
+        & .login-form.hidden{
+            display: none;
+        }
+        & .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            & .login-form-nick.active{
+                &::before{
+                    width: 365px;
+                    height: 45px;
+                    @media (max-width: 1440px) {
+                        width: 320px;
+                    }
+                    @media (max-width: 550px) {
+                        width: 250px;
+                    }
+                }
+            }
+            & .login-form-password.active{
+                &::before{
+                    width: 365px;
+                    height: 45px;
+                    @media (max-width: 1440px) {
+                        width: 320px;
+                    }
+                    @media (max-width: 550px) {
+                        width: 250px;
+                    }
+                }
+            }
+            & .login-form-nick {
+                margin-top: 50px;
+                @media (max-width: 550px) {
+                    margin-top: 40px;
+                }
+                &::before{
+                    height: 45px;
+
+                }
+                & input{
+                    height: 45px;
+                    width: 365px;
+                    background: none;
+                    border-bottom: 1px solid rgb(227, 148, 1);
+                    font-size: 18px;
+                    color: rgb(227, 148, 1);
+                    &::placeholder{
+                        color: rgb(227, 148, 1);
+                        opacity: 0.7;
+                    }
+                    @media (max-width: 1440px) {
+                        width: 320px;
+                    }
+                    @media (max-width: 550px) {
+                        width: 250px;
+                        font-size: 14px;
+                    }
+                }
+            }
+            & .login-form-password {
+                margin-top: 30px;
+                @media (max-width: 550px) {
+                    margin-top: 20px;
+                }
+                
+                & input{
+                    height: 45px;
+                    width: 365px;
+                    background: none;
+                    border-bottom: 1px solid rgb(227, 148, 1);
+                    font-size: 18px;
+                    color:rgb(227, 148, 1);
+                    &::placeholder{
+                        color: rgb(227, 148, 1);
+                        opacity: 0.7;
+                    }
+                    @media (max-width: 1440px) {
+                        width: 320px;
+                    }
+                    @media (max-width: 550px) {
+                        width: 250px;
+                        font-size: 14px;
+                    }
+                }
+            }
+            & .login-form-under{
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                margin-top: 30px;
+                width: 365px;
+                height: 45px;
+                @media (max-width: 1440px) {
+                    width: 320px;
+                }
+                @media (max-width: 550px) {
+                    width: 250px;
+                    margin-top: 20px;
+                }
+                & .login-form-under-remember{
+                    margin-top: 5px;
+                    margin-right: 0px;
+                    & input{
+                        display: inline-block;
+                        width: 15px;
+                        height: 15px;
+                        margin-right: 0;
+                        transform: translate(10.5px);
+                        @media (max-width: 550px) {
+                            width: 12px;
+                            height: 12px;
+                        }
+                    }
+                    .remember-checkbox {
+                        position: absolute;
+                        z-index: 2;
+                        opacity: 0;
+                        transform: translate(0px);
+                        @media (max-width: 550px) {
+                            transform: translate(0, 3px);
+                        }
+                      }
+                    .remember-checkbox+span {
+                        display: inline-flex;
+                        align-items: center;
+                        user-select: none;
+                        color:rgb(227, 148, 1);
+                        @media (max-width: 550px) {
+                            font-size: 12px;
+                            transform: translate(0, 3px);
+                        }
+                      }
+                      .remember-checkbox+span::before {
+                        content: '';
+                        pointer-events: none;
+                        display: inline-block;
+                        width: 15px;
+                        height: 15px;
+                        flex-shrink: 0;
+                        flex-grow: 0;
+                        border: 1px solid rgb(227, 148, 1);
+                        border-radius: 0.25em;
+                        margin-right: 10px;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-size: 50% 50%;
+                        @media (max-width: 550px) {
+                            width: 12px;
+                            height: 12px;
+                        }
+                        transition: all 0.5s ease 0s;
+                        &:hover{
+                            border: 1px solid rgb(255, 173, 21);
+                        }
+                      }
+                      .remember-checkbox:checked+span::before {
+                        background-color: rgb(227, 148, 1);
+                      }
+                }
+                & .login-form-under-submit{
+                    & input{
+                        cursor:pointer;
+                        font-family: 'Montserrat';
+                        font-weight: 500;
+                        border-radius: 10px;
+                        background-color: rgb(227, 148, 1);
+                        width: 150px;
+                        height: 30px;
+                        font-size: 20px;
+                        @media (max-width: 550px) {
+                            width: 100px;
+                            font-size: 14px;
+                        }
+                        transition: all 0.5s ease 0s;
+                    &:hover{
+                        background-color:rgb(250, 174, 33);
+                    }
+                    }
+                }
+            }
+        }
+        & .regist-form.hidden{
+            display: none;
+        }
+        & .regist-form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+            & .regist-form-input{
+                width: 360px;
+                height: 30px;
+                background: none;
+                border-bottom: 1px solid rgb(227, 148, 1);
+                color: rgb(227, 148, 1);
+                font-size: 16px;
+                &::placeholder{
+                    color: rgb(227, 148, 1);
+                    opacity: 0.7;
+                }
+                @media (max-width: 1440px){
+                    width: 315px;
+                }
+                @media (max-width: 550px){
+                    width: 250px;
+                    font-size: 14px;
+                }
+            }
+            & .regist-form-email{
+                & input{
+                }
+            }
+            & .regist-form-nick{
+                & input{
+                    margin-top: 20px;
+                    @media (max-width: 550px){
+                        margin-top: 15px;
+                    }
+                }
+            }
+            & .regist-form-pass{
+                & input{
+                    margin-top: 20px;
+                    @media (max-width: 550px){
+                        margin-top: 15px;
+                    }
+                }
+            }
+            & .regist-form-repass{
+                & input{
+                    margin-top: 20px;
+                    @media (max-width: 550px){
+                        margin-top: 15px;
+                    }
+                }
+            }
+            & .regist-form-submit{
+
+                & input {
+                    cursor:pointer;
+                    font-size: 20px;
+                    font-weight: 500;
+                    margin-top: 25px;
+                    width: 360px;
+                    height: 30px;
+                    background: rgb(227, 148, 1);
+                    border-radius: 10px;
+                    @media (max-width: 1440px){
+                        width: 315px;
+                    }
+                    @media (max-width: 550px){
+                        width: 250px;
+                        font-size: 16px;
+                        margin-top: 18px;
+                    }
+                    transition: all 0.5s ease 0s;
+                    &:hover{
+                        background-color: rgb(252, 169, 15);
+                    }
+                }
+            }
+        }
+    }
+}

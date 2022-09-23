@@ -1,0 +1,473 @@
+@import url("../pattens/nullstyle.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+body {
+  font-family: 'Montserrat';
+}
+
+.underline.active::before {
+  position: absolute;
+  content: '';
+  border-bottom: 1px solid #fdae1b;
+  transition: all 2s ease 0s;
+}
+
+.underline::before {
+  position: absolute;
+  content: '';
+  width: 0px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+.wrapper::before {
+  content: '';
+  filter: blur(5px);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-image: url("../login/image/background.png");
+  background-size: cover;
+  background-position: right;
+}
+
+.wrapper .logo {
+  top: 50px;
+  left: 50px;
+  position: absolute;
+  width: 100px;
+}
+
+@media (max-width: 1024px) {
+  .wrapper .logo {
+    display: none;
+  }
+}
+
+.wrapper .login {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  width: 500px;
+  border-radius: 20px;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login {
+    height: 250px;
+    width: 400px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login {
+    width: 300px;
+  }
+}
+
+.wrapper .login .login-swich {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.wrapper .login .login-swich .login-swich-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .login .login-swich .login-swich-login .login-swich-login-button {
+  background: none;
+  font-size: 26px;
+  font-weight: 600;
+  color: #e39401;
+  transition: all 0.5s ease 0s;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-swich .login-swich-login .login-swich-login-button {
+    font-size: 22px;
+  }
+}
+
+.wrapper .login .login-swich .login-swich-login .login-swich-login-button:hover {
+  color: #faae21;
+}
+
+.wrapper .login .login-swich .login-swich-registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .login .login-swich .login-swich-registration .login-swich-registration-button {
+  background: none;
+  font-size: 24px;
+  color: #e39401;
+  font-weight: 600;
+  transition: all 0.5s ease 0s;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-swich .login-swich-registration .login-swich-registration-button {
+    font-size: 20px;
+  }
+}
+
+.wrapper .login .login-swich .login-swich-registration .login-swich-registration-button:hover {
+  color: #faae21;
+}
+
+.wrapper .login .login-form.hidden {
+  display: none;
+}
+
+.wrapper .login .login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper .login .login-form .login-form-nick.active::before {
+  width: 365px;
+  height: 45px;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .login-form .login-form-nick.active::before {
+    width: 320px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-nick.active::before {
+    width: 250px;
+  }
+}
+
+.wrapper .login .login-form .login-form-password.active::before {
+  width: 365px;
+  height: 45px;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .login-form .login-form-password.active::before {
+    width: 320px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-password.active::before {
+    width: 250px;
+  }
+}
+
+.wrapper .login .login-form .login-form-nick {
+  margin-top: 50px;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-nick {
+    margin-top: 40px;
+  }
+}
+
+.wrapper .login .login-form .login-form-nick::before {
+  height: 45px;
+}
+
+.wrapper .login .login-form .login-form-nick input {
+  height: 45px;
+  width: 365px;
+  background: none;
+  border-bottom: 1px solid #e39401;
+  font-size: 18px;
+  color: #e39401;
+}
+
+.wrapper .login .login-form .login-form-nick input::placeholder {
+  color: #e39401;
+  opacity: 0.7;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .login-form .login-form-nick input {
+    width: 320px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-nick input {
+    width: 250px;
+    font-size: 14px;
+  }
+}
+
+.wrapper .login .login-form .login-form-password {
+  margin-top: 30px;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-password {
+    margin-top: 20px;
+  }
+}
+
+.wrapper .login .login-form .login-form-password input {
+  height: 45px;
+  width: 365px;
+  background: none;
+  border-bottom: 1px solid #e39401;
+  font-size: 18px;
+  color: #e39401;
+}
+
+.wrapper .login .login-form .login-form-password input::placeholder {
+  color: #e39401;
+  opacity: 0.7;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .login-form .login-form-password input {
+    width: 320px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-password input {
+    width: 250px;
+    font-size: 14px;
+  }
+}
+
+.wrapper .login .login-form .login-form-under {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-top: 30px;
+  width: 365px;
+  height: 45px;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .login-form .login-form-under {
+    width: 320px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-under {
+    width: 250px;
+    margin-top: 20px;
+  }
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember {
+  margin-top: 5px;
+  margin-right: 0px;
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember input {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 0;
+  transform: translate(10.5px);
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-under .login-form-under-remember input {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  transform: translate(0px);
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox {
+    transform: translate(0, 3px);
+  }
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox + span {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  color: #e39401;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox + span {
+    font-size: 12px;
+    transform: translate(0, 3px);
+  }
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox + span::before {
+  content: '';
+  pointer-events: none;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #e39401;
+  border-radius: 0.25em;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+  transition: all 0.5s ease 0s;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox + span::before {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox + span::before:hover {
+  border: 1px solid #ffad15;
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-remember .remember-checkbox:checked + span::before {
+  background-color: #e39401;
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-submit input {
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  border-radius: 10px;
+  background-color: #e39401;
+  width: 150px;
+  height: 30px;
+  font-size: 20px;
+  transition: all 0.5s ease 0s;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .login-form .login-form-under .login-form-under-submit input {
+    width: 100px;
+    font-size: 14px;
+  }
+}
+
+.wrapper .login .login-form .login-form-under .login-form-under-submit input:hover {
+  background-color: #faae21;
+}
+
+.wrapper .login .regist-form.hidden {
+  display: none;
+}
+
+.wrapper .login .regist-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.wrapper .login .regist-form .regist-form-input {
+  width: 360px;
+  height: 30px;
+  background: none;
+  border-bottom: 1px solid #e39401;
+  color: #e39401;
+  font-size: 16px;
+}
+
+.wrapper .login .regist-form .regist-form-input::placeholder {
+  color: #e39401;
+  opacity: 0.7;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .regist-form .regist-form-input {
+    width: 315px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .regist-form .regist-form-input {
+    width: 250px;
+    font-size: 14px;
+  }
+}
+
+.wrapper .login .regist-form .regist-form-nick input {
+  margin-top: 20px;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .regist-form .regist-form-nick input {
+    margin-top: 15px;
+  }
+}
+
+.wrapper .login .regist-form .regist-form-pass input {
+  margin-top: 20px;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .regist-form .regist-form-pass input {
+    margin-top: 15px;
+  }
+}
+
+.wrapper .login .regist-form .regist-form-repass input {
+  margin-top: 20px;
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .regist-form .regist-form-repass input {
+    margin-top: 15px;
+  }
+}
+
+.wrapper .login .regist-form .regist-form-submit input {
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 25px;
+  width: 360px;
+  height: 30px;
+  background: #e39401;
+  border-radius: 10px;
+  transition: all 0.5s ease 0s;
+}
+
+@media (max-width: 1440px) {
+  .wrapper .login .regist-form .regist-form-submit input {
+    width: 315px;
+  }
+}
+
+@media (max-width: 550px) {
+  .wrapper .login .regist-form .regist-form-submit input {
+    width: 250px;
+    font-size: 16px;
+    margin-top: 18px;
+  }
+}
+
+.wrapper .login .regist-form .regist-form-submit input:hover {
+  background-color: #fca90f;
+}

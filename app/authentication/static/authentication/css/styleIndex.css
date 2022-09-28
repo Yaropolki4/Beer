@@ -1,10 +1,5 @@
-@import url("nullstyle.css");
+@import url("../../../static/nullstyle.css");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-.div-for-seek {
-  display: none;
-}
-
 body {
   font-family: 'Montserrat';
 }
@@ -26,37 +21,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   width: 100%;
   min-height: 100%;
-}
-.wrapper .warning{
-  color: black;
-  font-size: 18px;
-  background-color: #fdae1b;
-  border: 2px solid red;
-  width: 365px;
-  height: 30px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.wrapper .warning.hidden{
-  opacity: 0;
-}
-
-@media (max-width: 1440px) {
-  .wrapper .warning{
-    width: 320px;
-  }
-}
-@media (max-width: 550px) {
-  .wrapper .warning{
-    width: 255px;
-    height: 20px;
-    font-size: 14px;
-  }
 }
 
 .wrapper::before {
@@ -69,7 +35,7 @@ body {
   width: 100%;
   min-height: 100%;
   overflow: hidden;
-  background-image: url('../image/background.png');
+  background-image: url("../image/background.png");
   background-size: cover;
   background-position: right;
 }
@@ -88,7 +54,6 @@ body {
 }
 
 .wrapper .login {
-  margin-bottom: 80px;
   display: flex;
   flex-direction: column;
   height: 350px;
@@ -419,18 +384,12 @@ body {
   align-items: center;
   margin-top: 30px;
 }
-/* .wrapper .login .regist-form .regist-form-warning{
-  color: red;
-  margin-right: 150px;
-  font-size: 16px;
-  margin-bottom: 5px;
-} */
- /* .wrapper .login .regist-form .regist-form-warning{
-  color: red;
-  margin-right: 170px;
-  font-size: 14px;
-  margin-top: 5px;
-}  */
+
+.wrapper .login .regist-form .regist-form-warning {
+  width: 100px;
+  height: 16px;
+}
+
 .wrapper .login .regist-form .regist-form-input {
   width: 360px;
   height: 30px;

@@ -99,17 +99,22 @@ loginform.addEventListener('submit', (event)=>{
     event.preventDefault();
 
     async function sendDataLogin(){
-        let response = await fetch('http://192.168.137.128:4567/login', {
+        let response = await fetch('/login', {
             method: 'POST',
             body: new FormData(loginform),
-          });
-      
-          let result = await response.json();
-          if(result.error){
+        });
+
+        if(response.url){
+            window.location.href = response.url;
+        }
+        
+        else{
+            let result = await response.json();
             warning.innerHTML = `${result.error[0]}`;
             warning.classList.remove('hidden');
-          }
-    }
+        }
+        }
+        sendDataLogin();
     sendDataLogin();
 });
 

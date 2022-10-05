@@ -1,0 +1,112 @@
+@import url(./nullstyle.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+[class*="ymaps-2"][class*="-ground-pane"] {
+    -webkit-filter: grayscale(100%) url(./yellowfilter.svg#yellowfilter);
+            filter: grayscale(100%) url(./yellowfilter.svg#yellowfilter);
+  }
+
+.wrapper{
+    & .nav.notifications{
+        display: block;
+        width: 350px;
+        & .nav-item{
+            display: none;
+        }
+    }
+    & .nav {
+        transition: all 1s ease 0s;
+        border-right: 1px solid orange;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        width: 190px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        position: absolute;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        backdrop-filter: blur(3px);
+        @media (max-width: 1280px){
+            width: 160px;
+        }
+        @media (max-width: 1024px){
+            width: 140px;
+        }
+        @media (max-width: 854px){
+            width: 120px
+        }
+        @media (max-width: 768px){
+            flex-direction: row;
+            width: 100%;
+            height: 50px;
+        }
+        & .nav-close-notifications{
+            transition: all 1s ease 0s;
+            display: none;
+            position: absolute;
+            right: -2px;
+            height: 100%;
+            width: 1px;
+            background-color: rgb(227, 148, 1);
+        }
+        & .nav-close-notifications.notifications{
+            display: block;
+            width: 10px;
+            transition: all 1s ease 0s;
+        }
+        & .nav-notifications{
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            & .nav-notifications-item{
+                font-size: 20px;
+                color: white;
+                width: 100%;
+                height: 70px;
+                border-bottom: 1px solid rgb(227, 148, 1);
+            }
+        }
+        & .nav-notifications.notifications{
+            display: flex;
+        }
+        & .nav-item{
+            width: 130px;
+            cursor: pointer;
+            @media (max-width: 1280px){
+                width: 100px;
+            }
+            @media (max-width: 1024px){
+                width: 80px;
+            }
+            @media (max-width: 854px){
+                width: 65px;
+            }
+        }
+        /* & .nav-item_notifications{
+            position: relative;
+            & .notifications{
+                position: absolute;
+                top: 0;
+                width: 350px;
+                height: 50px;
+                border: 1px solid black;
+
+            }
+        } */
+        & .nav-main{
+            & .nav-main-img{
+            }
+        }
+    }
+
+
+    & .map{
+        height: 100vh;
+        filter: invert(100%) hue-rotate(335deg) contrast(130%);
+        position: relative;
+    }
+}

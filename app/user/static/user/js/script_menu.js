@@ -92,4 +92,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+
+
+
+    if(document.querySelector('.profile-main-ava-edit-button')){
+        let addFriend = document.querySelector('.profile-main-ava-edit-button')
+        console.log(addFriend)
+
+
+    addFriend.addEventListener('click', event =>{
+        let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
+        let nickName = nickNameBlock.innerHTML;
+        socket.emit('friendship_request',`${nickName}`);
+    });
+
+    socket.on('friend_notification', data => {
+        console.log(1);
+        console.log(data);
+    });
+    }
+
 });
+

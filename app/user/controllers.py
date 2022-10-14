@@ -3,7 +3,7 @@ import json
 from flask import (
     Blueprint, render_template,
     request, Response,
-    abort,
+    abort, redirect,
     url_for,
 )
 ###
@@ -12,6 +12,7 @@ from  marshmallow import  ValidationError
 from flask_socketio import send, emit, join_room
 
 from app import socketio
+from app.authentication.models import Users
 from .friend_models import Friends, FriendshipRequest
 from .user_models import UserInfo
 
@@ -49,12 +50,22 @@ def edit_profile():
         resp.data = json.dumps({"error": err.messages})
         return resp
 
-
-
-@user.route('/profile/other')
+@user.route('/profile/<name>')
 @login_required
-def other_profile():
-    return render_template("other_profile.html")
+def other_profile(name):
+    user = Users.get_user_by_name(name)
+
+    if name==current_user.name:
+        return redirect(url_for(".profile"))
+
+
+    if user:
+        description = user.user_info[0].profile_description
+        return render_template("other_profile.html", name=name, description=description)
+    else:
+        return redirect(url_for(".index"))
+
+
 
 """SOCKET"""
 @socketio.on('message')
@@ -62,7 +73,20 @@ def message(data):
     #print(f"\n\n{data}\n\n")
     send(data, broadcast=True)
 
-@socketio.on('join')
-def join(data):
-    join_room(data['room'])
-    send({'msg': data['name'] + ' законектился.'}, room=data['room'])
+@socketio.on('friendship_request')
+def friendship_request(name):
+    to_user = Users.get_user_by_name(name)
+    FriendshipRequest.create_friendship_request(from_user=current_user.id, to_user=to_user.id)
+    send_data = current_user.name
+    emit('friend_notification', send_data, broadcast = True)
+
+
+@socketio.on('resp_friendship_request')
+def resp_friendship_request(data):
+    f_request = FriendshipRequest.get_request(data.from_user, current_user.id)
+
+    if data.resp == "accept":
+        f_request.accept()
+    elif data.resp == "reject":
+        f_request.reject()
+

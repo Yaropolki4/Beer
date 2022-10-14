@@ -56,6 +56,10 @@ class Users(UserMixin, db.Model):
         except AttributeError:
             raise ValidationError("Неправильный логин")
 
+    @staticmethod
+    def get_user_by_name(name):
+        return Users.query.filter_by(name=name).first()
+
 @login.user_loader
 def load_user(id):
     return Users.query.get(id)

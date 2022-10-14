@@ -1,3 +1,4 @@
+import enum
 
 from marshmallow import ValidationError
 
@@ -17,6 +18,9 @@ class UserInfo(db.Model):
     friends = db.relationship('Friends',
                               backref='userinfo')
 
+    # user_notifications = db.relationship('UserNotifications',
+    #                                      backref='userinfo')
+
     @staticmethod
     def create_user_info_default(user_id: int):
         user_info = UserInfo(user_id=user_id)
@@ -34,4 +38,21 @@ class UserInfo(db.Model):
             db.session.commit()
         else:
             raise ValidationError("Пользователь с таким именем существует")
+
+# @enum.unique
+# class NotificationType(enum.Enum):
+#     friend_request = "friend_request"
+#     meeting  = "meeting"
+#
+# class UserNotifications(db.Model):
+#     __tablename__ = "user_notification"
+#
+#     id = db.Column(db.Integer, primary_key=True, nullable=False)
+#     user_info_id = db.Column(db.Integer, db.ForeignKey("userinfo.id"), nullable=False)
+#     notification_type = db.Column(db.Enum(NotificationType), nullable=False)
+
+
+
+
+
 

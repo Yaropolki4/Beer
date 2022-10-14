@@ -15,16 +15,21 @@ class FriendshipRequest(db.Model):
 
     @staticmethod
     def create_friendship_request(from_user, to_user):
-
-        if FriendshipRequest.query.filter_by(from_user=from_user, to_user=to_user):
+        print(1)
+        if FriendshipRequest.query.filter_by(from_user=from_user, to_user=to_user).first():
+            print(2)
             # If friendship request exist
             return False
         else:
+            print(3)
             friendship_request = FriendshipRequest(from_user=from_user, to_user=to_user)
             db.session.add(friendship_request)
             db.session.commit()
             return True
 
+    @staticmethod
+    def get_request(from_user, to_user):
+        return FriendshipRequest.query.filter_by(from_user=from_user, to_user=to_user).first()
 
     def accept(self):
         """Принять запрос в друзья"""
@@ -59,16 +64,13 @@ class FriendshipManager():
         db.session.commit()
 
     def delete_friend(self, user_id, friend_id):
-        try:
-            friendship = Friends.quary.filter(Friends.user_id.in_([user_id, friend_id]),
-                                              Friends.friend_id.in_([friend_id, user_id]))
-            if friendship:
-                friendship.delete()
-                db.session.commit()
-                return True
-            else:
-                return False
-        except Exception:
+        friendship = Friends.quary.filter(Friends.user_id.in_([user_id, friend_id]),
+                                          Friends.friend_id.in_([friend_id, user_id]))
+        if friendship:
+            friendship.delete()
+            db.session.commit()
+            return True
+        else:
             return False
 
 class Friends(db.Model):

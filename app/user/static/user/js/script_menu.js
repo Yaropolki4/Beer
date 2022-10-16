@@ -94,23 +94,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+//////////////////////////////////////////ИСПРАВИТЬ РЕДАКТИРОВАТЬ ПРОФИЛИ КАК ДРУЗЬЯ
+    if(document.querySelector('.profile-main-ava-add-button')){
+        let addFriend = document.querySelector('.profile-main-ava-add-button');
+        let cancelFriend = document.querySelector('.profile-main-ava-cancel-button');
 
-    if(document.querySelector('.profile-main-ava-edit-button')){
-        let addFriend = document.querySelector('.profile-main-ava-edit-button')
-        console.log(addFriend)
 
+        addFriend.addEventListener('click', event =>{
+            let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
+            let nickName = nickNameBlock.innerHTML;
+            add.classList.add('invis');
+            cancel.classList.remove('invis');
+            socket.emit('friendship_request',`${nickName}`);
+        });
+        cancelFriend.addEventListener('click', event =>{
+            let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
+            let nickName = nickNameBlock.innerHTML;
+            add.classList.remove('invis');
+            cancel.classList.add('invis');
+            socket.emit('cancel_friendship_request',`${nickName}`);
+        });
+    }
 
-    addFriend.addEventListener('click', event =>{
-        let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
-        let nickName = nickNameBlock.innerHTML;
-        socket.emit('friendship_request',`${nickName}`);
-    });
 
     socket.on('friend_notification', data => {
-        console.log(1);
-        console.log(data);
-    });
-    }
+            console.log(data);
+            let notificTemplate = document.querySelector('.nav-notifications-item').cloneNode(true);
+            notificTemplate.style.display = 'grid';
+            let nickNameField = notificTemplate.querySelector('.nav-notifications-item-nick').querySelector('span');
+            nickNameField.innerHTML = `${data}`;
+            notifications.append(notificTemplate);
+
+        });
 
 });
 

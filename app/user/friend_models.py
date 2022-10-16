@@ -15,10 +15,13 @@ class FriendshipRequest(db.Model):
 
     @staticmethod
     def create_friendship_request(from_user, to_user):
-        print(1)
+
+        if from_user==to_user:
+            print(1)
+            return False
         if FriendshipRequest.query.filter_by(from_user=from_user, to_user=to_user).first():
             print(2)
-            # If friendship request exist
+            # Если запрос на дружбу существует
             return False
         else:
             print(3)
@@ -72,6 +75,16 @@ class FriendshipManager():
             return True
         else:
             return False
+
+    def get_friend_status(self, user1_id, user2_id):
+        if Friends.query.filter_by(user_id=user1_id, friend_id=user2_id).first():
+            return "friends"
+        elif FriendshipRequest.get_request(user1_id, user2_id):
+            return "cansel"
+        elif FriendshipRequest.get_request(user2_id, user1_id):
+            return "add_reject"
+        else:
+            return "not_friendship"
 
 class Friends(db.Model):
     __tablename__ = "friends"

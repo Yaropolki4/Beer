@@ -5,6 +5,8 @@ body {
   color: orange;
 }
 
+
+
 .wrapper::before {
   content: '';
   filter: blur(3px);
@@ -432,7 +434,10 @@ body {
   font-weight: 600;
 }
 
-.wrapper .container .profile-main .profile-main-ava .profile-main-ava-edit {
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-add.invis {
+  display: none;
+}
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-add {
   margin-top: 15px;
   width: 100%;
   border: 1px solid #e39401;
@@ -440,7 +445,68 @@ body {
   border-radius: 10px;
 }
 
-.wrapper .container .profile-main .profile-main-ava .profile-main-ava-edit .profile-main-ava-edit-button {
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-add .profile-main-ava-add-button {
+  width: 100%;
+  background: none;
+  height: 30px;
+  color: orange;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-remove.invis {
+  display: none;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-remove {
+  margin-top: 15px;
+  width: 100%;
+  border: 1px solid #e39401;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-remove .profile-main-ava-remove-button {
+  width: 100%;
+  background: none;
+  height: 30px;
+  color: orange;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-accept.invis {
+  display: none;
+}
+
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-accept {
+  display: flex;
+  margin-top: 15px;
+  width: 100%;
+  border: 1px solid #e39401;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-accept .profile-main-ava-accept-button {
+  border-right: 1px solid #e39401;
+  width: 100%;
+  background: none;
+  height: 30px;
+  color: orange;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-cancel.invis {
+  display: none;
+}
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-cancel {
+  display: flex;
+  margin-top: 15px;
+  width: 100%;
+  border: 1px solid #e39401;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-cancel .profile-main-ava-cancel-button {
+  border-right: 1px solid #e39401;
   width: 100%;
   background: none;
   height: 30px;

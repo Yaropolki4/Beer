@@ -103,8 +103,18 @@
                     <div class="profile-main-ava-nickname">
                         <span class = 'profile-main-ava-nickname-nick'>{{name}}</span>
                     </div>
-                    <div class="profile-main-ava-edit">
-                        <button class="profile-main-ava-edit-button">Добавить в друзья</button>
+                    <div class="profile-main-ava-add invis">
+                        <button class="profile-main-ava-add-button">Добавить в друзья</button>
+                    </div>
+                    <div class="profile-main-ava-remove invis">
+                        <button class="profile-main-ava-remove-button">Удалить из друзей</button>
+                    </div>
+                    <div class="profile-main-ava-accept invis">
+                        <button class="profile-main-ava-accept-button accept">Принять</button>
+                         <button class="profile-main-ava-accept-button reject">Отменить</button>
+                    </div>
+                    <div class="profile-main-ava-cancel invis">
+                        <button class="profile-main-ava-cancel-button">Отменить</button>
                     </div>
                 </div>
                 <div class="profile-main-achievements">
@@ -173,6 +183,7 @@
             </div>
         </div>
     </div>
+    <script>let friendStatus = "{{friend_status}}"</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="{{url_for('.static', filename='js/other_profile_script.js')}}"></script>
 </body>

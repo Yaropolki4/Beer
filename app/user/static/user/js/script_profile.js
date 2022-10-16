@@ -46,6 +46,7 @@ submitBut.addEventListener('click',event=>{
     async function sendChanges(){
         let response = await fetch('/edit_profile', {
             method: 'POST',
+            method: 'POST',
             body: new FormData(editForm),
         });
         let result = await response.json()

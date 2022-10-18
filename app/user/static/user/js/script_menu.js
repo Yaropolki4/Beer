@@ -96,23 +96,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //////////////////////////////////////////ИСПРАВИТЬ РЕДАКТИРОВАТЬ ПРОФИЛИ КАК ДРУЗЬЯ
     if(document.querySelector('.profile-main-ava-add-button')){
-        let addFriend = document.querySelector('.profile-main-ava-add-button');
-        let cancelFriend = document.querySelector('.profile-main-ava-cancel-button');
-
-
         addFriend.addEventListener('click', event =>{
             let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
             let nickName = nickNameBlock.innerHTML;
             add.classList.add('invis');
-            cancel.classList.remove('invis');
             socket.emit('friendship_request',`${nickName}`);
+            loading.classList.remove('invis');
+            //что-то присылается в ответ
+            socket.on('friendship_request_response', data => {
+
+            })
+            //в сокете
+            setTimeout(()=>{
+              loading.classList.add('invis');
+              cancel.classList.remove('invis');
+            }, 700)
+            //
         });
         cancelFriend.addEventListener('click', event =>{
             let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
             let nickName = nickNameBlock.innerHTML;
-            add.classList.remove('invis');
             cancel.classList.add('invis');
             socket.emit('cancel_friendship_request',`${nickName}`);
+            loading.classList.remove('invis');
+            socket.on('cancel_friendship_request_response', data => {
+
+            })
+            //в сокете
+            setTimeout(()=>{
+              loading.classList.add('invis');
+              add.classList.remove('invis');
+            }, 700)
         });
     }
 
@@ -124,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let nickNameField = notificTemplate.querySelector('.nav-notifications-item-nick').querySelector('span');
             nickNameField.innerHTML = `${data}`;
             notifications.append(notificTemplate);
-
         });
 
 });

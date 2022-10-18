@@ -1,5 +1,8 @@
-let addFriend = document.querySelector('.profile-main-ava-add-button')
+let addFriend = document.querySelector('.profile-main-ava-add-button');
+let cancelFriend = document.querySelector('.profile-main-ava-cancel-button');
 
+
+let loading = document.querySelector('.profile-main-ava-loading');
 let add = document.querySelector('.profile-main-ava-add');
 let remove = document.querySelector('.profile-main-ava-remove');
 let accept = document.querySelector('.profile-main-ava-accept');

@@ -512,6 +512,35 @@ body {
   height: 30px;
   color: orange;
 }
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-loading{
+  display: flex;
+  margin-top: 15px;
+  height: 30px;
+  width: 100%;
+  border: 1px solid #e39401;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-loading::after{
+  content: '';
+  opacity: 0.5;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: orange;
+  margin: auto 5px;
+  animation-name: loading-circle;
+  animation-duration: 0.7s;
+  animation-play-state: running;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+.wrapper .container .profile-main .profile-main-ava .profile-main-ava-loading.invis {
+  display: none;
+}
 
 .wrapper .container .profile-main .profile-main-achievements {
   margin-top: 40px;
@@ -621,4 +650,13 @@ body {
   .wrapper .container .profile-info .profile-info-activ .profile-info-activ-timeline {
     height: 120px;
   }
+}
+
+
+@keyframes loading-circle{
+    0%{
+    }
+    100%{
+        margin-left: 90%;
+    }
 }

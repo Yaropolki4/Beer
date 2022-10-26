@@ -59,7 +59,7 @@ class UserNotifications(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_notifications(user_info_id):
+    def get_all_notifications(user_info_id):
         return UserNotifications.query.filter_by(user_info_id=user_info_id).all()
 
 

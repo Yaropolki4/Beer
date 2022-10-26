@@ -8,6 +8,9 @@ let remove = document.querySelector('.profile-main-ava-remove');
 let accept = document.querySelector('.profile-main-ava-accept');
 let cancel = document.querySelector('.profile-main-ava-cancel');
 
+let acceptButton = accept.querySelector('.accept');
+let rejectButton = accept.querySelector('.reject');
+
 console.log(friendStatus)
 if(friendStatus == 'friends'){
     remove.classList.remove('invis');

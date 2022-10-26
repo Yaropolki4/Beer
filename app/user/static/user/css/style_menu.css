@@ -66,6 +66,22 @@ body {
   display: flex;
 }
 
+.nav-notifications-item-friend{
+  display: none;
+  width: 100%;
+  height: 70px;
+}
+.nav-notifications-item-friend-ava{
+    width: 60px;
+}
+.nav-notifications-item-friend-online{
+    margin-top: 7px;
+    font-size: 16px;
+}
+.nav-notifications-item-friend-close{
+    width: 60px;
+}
+
 .nav .nav-notifications .nav-notifications-item {
   display: none;
   color: white;

@@ -125,30 +125,14 @@
                         <span>Друзья</span>
                     </div>
                     <div class="profile-main-achievements-icons">
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
+                       {% for friend_name in friends_list.friends_names %}
+                        <a href="/profile/{{friend_name}}">
+                            <div class="profile-main-achievements-icons-icon">
+                                <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
+                                <span>{{friend_name}}</span>
+                            </div>
+                        </a>
+                        {%endfor%}
                     </div>
                 </div>
             </div>

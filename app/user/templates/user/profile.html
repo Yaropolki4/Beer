@@ -11,86 +11,6 @@
 </head>
 <body>
     <div class="wrapper">
-<!--        <div class="nav">-->
-<!--            <div class="nav-main nav-item">-->
-<!--                <a href="/index"><img class = 'nav-main-img' src="{{url_for('.static', filename='image/logo.svg')}}" alt=""></a>-->
-<!--                <span class = 'nav-item-title'>Мейн</span>-->
-<!--            </div>-->
-<!--            <div class="nav-main nav-item">-->
-<!--                <img class = 'nav-main-img' src="{{url_for('.static', filename='image/logo.svg')}}" alt="">-->
-<!--                <span class = 'nav-item-title'>Профиль</span>-->
-<!--            </div>-->
-<!--            <div class="nav-main nav-item nav-item_friends">-->
-<!--                <img class = 'nav-main-img' src="{{url_for('.static', filename='image/logo.svg')}}" alt="">-->
-<!--                <span class = 'nav-item-title'>Друзья</span>-->
-<!--            </div>-->
-<!--            <div class="nav-main nav-item nav-item_notifications">-->
-<!--                <img class = 'nav-main-img' src="{{url_for('.static', filename='image/logo.svg')}}" alt="">-->
-<!--                <span class = 'nav-item-title'>Уведомления</span>-->
-<!--            </div>-->
-<!--            <div class="nav-main nav-item ">-->
-<!--                <img class = 'nav-main-img' src="{{url_for('.static', filename='image/logo.svg')}}" alt="">-->
-<!--                <span class = 'nav-item-title'>Инструкция</span>-->
-<!--            </div>-->
-<!--            <div class="nav-close-notifications">-->
-
-<!--            </div>-->
-<!--            <div class="nav-notifications">-->
-<!--                <div class="nav-notifications-item">-->
-<!--                    Мой член большой-->
-<!--                </div>-->
-<!--                <div class="nav-notifications-item">-->
-
-<!--                </div>-->
-<!--                <div class="nav-notifications-item">-->
-
-<!--                </div>-->
-<!--                <div class="nav-notifications-item">-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="nav-friends">-->
-<!--                <div class="nav-friends-item">-->
-<!--                    <div class="nav-friends-item-ava">-->
-<!--                        <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">-->
-<!--                    </div>-->
-<!--                    <div class="nav-friends-item-nick">-->
-<!--                        <span>бухарик</span>-->
-<!--                    </div>-->
-<!--                    <div class="nav-friends-item-online">-->
-<!--                        <span>Online</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="nav-friends-item">-->
-
-<!--                </div>-->
-<!--                <div class="nav-friends-item">-->
-
-<!--                </div>-->
-<!--                <div class="nav-friends-item">-->
-
-<!--                </div>-->
-<!--                <div class="nav-friends-chat">-->
-<!--                    <div class="nav-friends-chat-field">-->
-<!--                    </div>-->
-<!--                    <div class="nav-friends-chat-form">-->
-<!--                        <form name = 'chatForm' action="">-->
-<!--                            <div class="form-container">-->
-<!--                                <div contenteditable="true" class="nav-friends-chat-form-text">-->
-
-<!--                                </div>-->
-<!--                                <div class="nav-friends-chat-form-submit" >-->
-<!--                                    <input name = 'message-submit' type="submit">-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                    <div class="nav-friend-chat-close">-->
-<!--                        <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
         <div class="container">
             <div class="profile-main">
                 <div class="profile-main-ava">
@@ -157,30 +77,14 @@
                         <span>Друзья</span>
                     </div>
                     <div class="profile-main-achievements-icons">
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
-                        <div class="profile-main-achievements-icons-icon">
-                            <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                            <span>ПИВОЕД</span>
-                        </div>
+                        {% for friend_name in friends_list.friends_names %}
+                        <a href="/profile/{{friend_name}}">
+                            <div class="profile-main-achievements-icons-icon">
+                                <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
+                                <span>{{friend_name}}</span>
+                            </div>
+                        </a>
+                        {%endfor%}
                     </div>
                 </div>
             </div>

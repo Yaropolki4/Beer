@@ -96,49 +96,107 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //////////////////////////////////////////ИСПРАВИТЬ РЕДАКТИРОВАТЬ ПРОФИЛИ КАК ДРУЗЬЯ
     if(document.querySelector('.profile-main-ava-add-button')){
-        addFriend.addEventListener('click', event =>{
             let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
             let nickName = nickNameBlock.innerHTML;
+        addFriend.addEventListener('click', event =>{
             add.classList.add('invis');
             socket.emit('friendship_request',`${nickName}`);
             loading.classList.remove('invis');
             //что-то присылается в ответ
             socket.on('friendship_request_response', data => {
-
+                if(data=='friendship_request'){
+                    setTimeout(()=>{
+                        loading.classList.add('invis');
+                        cancel.classList.remove('invis');
+                    }, 500)
+                }
             })
-            //в сокете
-            setTimeout(()=>{
-              loading.classList.add('invis');
-              cancel.classList.remove('invis');
-            }, 700)
-            //
         });
         cancelFriend.addEventListener('click', event =>{
-            let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
-            let nickName = nickNameBlock.innerHTML;
             cancel.classList.add('invis');
             socket.emit('cancel_friendship_request',`${nickName}`);
             loading.classList.remove('invis');
-            socket.on('cancel_friendship_request_response', data => {
-
+            socket.on('friendship_request_response', data => {
+                if(data=='cancel_friendship_request'){
+                    setTimeout(()=>{
+                        loading.classList.add('invis');
+                        add.classList.remove('invis');
+                    }, 500)
+                }
             })
-            //в сокете
-            setTimeout(()=>{
-              loading.classList.add('invis');
-              add.classList.remove('invis');
-            }, 700)
         });
+        acceptButton.addEventListener('click', event=>{
+            let resp = true
+            accept.classList.add('invis');
+            loading.classList.remove('invis');
+            socket.emit('resp_friendship_request', {name: `${nickName}`,
+                                                      resp: resp});
+            socket.on('friendship_request_response', data => {
+                if(data == 'resp_friendship_request' && resp){
+                    setTimeout(()=>{
+                    loading.classList.add('invis');
+                    remove.classList.remove('invis');
+                    }, 500);
+                }
+            })
+        });
+        rejectButton.addEventListener('click', event=>{
+            let resp = false;
+            accept.classList.add('invis');
+            loading.classList.remove('invis');
+            socket.emit('resp_friendship_request', {name: `${nickName}`,
+                                                      resp: resp});
+            socket.on('friendship_request_response', data => {
+                if(data == 'resp_friendship_request' && !resp)
+                    setTimeout(()=>{
+                        loading.classList.add('invis');
+                        add.classList.remove('invis');
+                    }, 500)
+            })
+        })
+        remove.addEventListener('click', event=>{
+            remove.classList.add('invis');
+            socket.emit('delete_friendship',`${nickName}`);
+            loading.classList.remove('invis');
+            socket.on('friendship_request_response', data => {
+            if(data == 'delete_friendship'){
+                setTimeout(()=>{
+                    loading.classList.add('invis');
+                    add.classList.remove('invis');
+                }, 500)
+            }
+            })
+        })
     }
 
 
-    socket.on('friend_notification', data => {
-            console.log(data);
+    socket.on('update_friendship_info', data => {
+        if(data['info_status'] == 'friend_notification'){
             let notificTemplate = document.querySelector('.nav-notifications-item').cloneNode(true);
             notificTemplate.style.display = 'grid';
             let nickNameField = notificTemplate.querySelector('.nav-notifications-item-nick').querySelector('span');
-            nickNameField.innerHTML = `${data}`;
+            nickNameField.innerHTML = `${data.name}`;
             notifications.append(notificTemplate);
-        });
-
+            add.classList.add('invis');
+            accept.classList.remove('invis');
+        }
+        else if(data['info_status'] == 'friends'){
+            cancel.classList.add('invis');
+            remove.classList.remove('invis');
+            let notificTemplate = document.querySelector('.nav-notifications-item-friend').cloneNode(true);
+            notificTemplate.style.display = 'flex';
+            let nickNameField = notificTemplate.querySelector('.nav-notifications-item-friend-online').querySelector('span');
+            nickNameField.innerHTML = `${data.name} принял вашу заявку в друзья`;
+            notifications.append(notificTemplate);
+        }
+        else if(data['info_status'] == 'delete'){
+            remove.classList.add('invis');
+            add.classList.remove('invis');
+        }
+        else if(data['info_status'] == 'reject'){
+            cancel.classList.add('invis');
+            add.classList.remove('invis');
+        }
+    })
 });
 

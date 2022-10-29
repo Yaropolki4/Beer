@@ -33,7 +33,7 @@
 
             </div>
             <div class="nav-notifications">
-                <div class="nav-notifications-item-friend">
+                <div class="nav-notifications-item-friend invis" style = "display: none;">
                     <div class="nav-notifications-item-friend-ava">
                         <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
                     </div>
@@ -41,27 +41,27 @@
                         <span></span>
                     </div>
                     <div class="nav-notifications-item-friend-close">
-                        <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
+                        <img class = 'nav-notifications-item-friend-close-img' src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
                     </div>
                 </div>
-            <div class="nav-notifications-item">
-                <div class="nav-notifications-item-ava">
-                    <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
-                </div>
-                <div class="nav-notifications-item-online">
-                    <span>Заявка в друзья</span>
-                </div>
-                <div class="nav-notifications-item-nick">
-                    <span>бухарик</span>
-                </div>
-                <div class="nav-notifications-item-accept">
-                    <button>Принять</button>
-                </div>
-                <div class="nav-notifications-item-reject">
-                    <button>Отклонить</button>
+                <div class="nav-notifications-item">
+                    <div class="nav-notifications-item-ava">
+                        <img src="{{url_for('.static', filename='image/logo.svg')}}" alt="">
+                    </div>
+                    <div class="nav-notifications-item-online">
+                        <span>Заявка в друзья</span>
+                    </div>
+                    <div class="nav-notifications-item-nick">
+                        <span></span>
+                    </div>
+                    <div class="nav-notifications-item-accept">
+                        <button>Принять</button>
+                    </div>
+                    <div class="nav-notifications-item-reject">
+                        <button>Отклонить</button>
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="nav-friends">
                 <div class="nav-friends-item">
                     <div class="nav-friends-item-ava">

@@ -39,28 +39,28 @@ class UserInfo(db.Model):
         else:
             raise ValidationError("Пользователь с таким именем существует")
 
-@enum.unique
-class NotificationType(enum.Enum):
-    friend_request = "friend_request"
-    meeting  = "meeting"
-
-class UserNotifications(db.Model):
-    __tablename__ = "user_notification"
-
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    user_info_id = db.Column(db.Integer, db.ForeignKey("userinfo.id"), nullable=False)
-    notification_type = db.Column(db.Enum(NotificationType), nullable=False)
-    mark_viewed = db.Column(db.Boolean, nullable=False, default=True)
-
-    @staticmethod
-    def create_notifications(user_info_id, notification_type):
-        notifications = UserNotifications(user_info_id=user_info_id, notification_type=notification_type)
-        db.session.add(notifications)
-        db.session.commit()
-
-    @staticmethod
-    def get_all_notifications(user_info_id):
-        return UserNotifications.query.filter_by(user_info_id=user_info_id).all()
+# @enum.unique
+# class NotificationType(enum.Enum):
+#     friend_request = "friend_request"
+#     meeting  = "meeting"
+#
+# class UserNotifications(db.Model):
+#     __tablename__ = "user_notification"
+#
+#     id = db.Column(db.Integer, primary_key=True, nullable=False)
+#     user_info_id = db.Column(db.Integer, db.ForeignKey("usersinfo.id"), nullable=False)
+#     notification_type = db.Column(db.Enum(NotificationType), nullable=False)
+#     mark_viewed = db.Column(db.Boolean, nullable=False, default=True)
+#
+#     @staticmethod
+#     def create_notifications(user_info_id, notification_type):
+#         notifications = UserNotifications(user_info_id=user_info_id, notification_type=notification_type)
+#         db.session.add(notifications)
+#         db.session.commit()
+#
+#     @staticmethod
+#     def get_all_notifications(user_info_id):
+#         return UserNotifications.query.filter_by(user_info_id=user_info_id).all()
 
 
 

@@ -66,10 +66,16 @@ body {
   display: flex;
 }
 
-.nav-notifications-item-friend{
-  display: none;
+.nav-notifications-item-friend.invis{
+  display: flex;
+  transform: translate(-100%);
   width: 100%;
   height: 70px;
+}
+.nav-notifications-item-friend{
+  display: flex;
+  transform: translate(0px);
+  transition: all 1s ease 0s;
 }
 .nav-notifications-item-friend-ava{
     width: 60px;
@@ -83,6 +89,7 @@ body {
 }
 
 .nav .nav-notifications .nav-notifications-item {
+  transition: all 1s ease 0s;
   display: none;
   color: white;
   width: 100%;

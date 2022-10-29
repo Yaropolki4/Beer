@@ -28,7 +28,7 @@ borderButton.addEventListener('click', event =>{
 
 
 document.addEventListener('click', event => {
-    if(event.target.closest('.nav')!=nav){
+    if(event.target.closest('.nav')!=nav && !event.target.classList.contains('nav-notifications-item-friend-close-img')){
         nav.classList.remove('visible');
         borderButton.classList.remove('visible');
         notifications.classList.remove('visible');
@@ -58,6 +58,21 @@ let messageArea = document.querySelector('.nav-friends-chat-field');
 let textArea = document.querySelector('.nav-friends-chat-form-text');
 
 textArea.innerHTML = '';
+
+
+
+
+//кнопка закрытия уведомления
+notifications.addEventListener('click', event => {
+    let target = event.target;
+    if(target.classList.contains('nav-notifications-item-friend-close-img')){
+        let notification = target.closest('.nav-notifications-item-friend');
+        notification.classList.toggle('invis');
+        setTimeout(() => {
+            notifications.removeChild(notification);
+        }, 1000);
+    }
+})
 
 document.addEventListener('DOMContentLoaded', () => {
     var socket = io.connect('http://' + document.domain + ':' + location.port);
@@ -91,10 +106,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    //обработка уведомления о добавлении в друзья
+    let menuAcceptButton = document.querySelector('.nav-notifications-item-accept');
+    let menuRejectButton = document.querySelector('.nav-notifications-item-reject');
 
+    notifications.addEventListener('click', event => {
+        if(event.target.closest('.nav-notifications-item-accept button')){
+            try {
+                var validationNick = document.querySelector('.profile-main-ava-nickname-nick').innerHTML;
+                console.log(2);
+            }
+            catch{var validationNick = false;}
+            let nickName = event.target.closest('.nav-notifications-item').querySelector('.nav-notifications-item-nick span').innerHTML;
+            let resp = true;
+            if(nickName == validationNick){
+                accept.classList.add('invis');
+                loading.classList.remove('invis');
+            }
+            socket.emit('resp_friendship_request', {name: `${nickName}`,
+                                                      resp: resp});
+            socket.on('resp_friendship_request', data => {
+                console.log(1);
+            });
+        }
+    });
 
-
-//////////////////////////////////////////ИСПРАВИТЬ РЕДАКТИРОВАТЬ ПРОФИЛИ КАК ДРУЗЬЯ
     if(document.querySelector('.profile-main-ava-add-button')){
             let nickNameBlock = document.querySelector('.profile-main-ava-nickname-nick');
             let nickName = nickNameBlock.innerHTML;
@@ -103,39 +139,61 @@ document.addEventListener('DOMContentLoaded', () => {
             socket.emit('friendship_request',`${nickName}`);
             loading.classList.remove('invis');
             //что-то присылается в ответ
-            socket.on('friendship_request_response', data => {
-                if(data=='friendship_request'){
+            socket.on('friendship_request', data => {
+            //console.log(data);
+                //if(data=='friendship_request'){
                     setTimeout(()=>{
                         loading.classList.add('invis');
                         cancel.classList.remove('invis');
                     }, 500)
-                }
-            })
+                //}
+            });
         });
         cancelFriend.addEventListener('click', event =>{
             cancel.classList.add('invis');
             socket.emit('cancel_friendship_request',`${nickName}`);
             loading.classList.remove('invis');
-            socket.on('friendship_request_response', data => {
-                if(data=='cancel_friendship_request'){
+            socket.on('cancel_friendship_request', data => {
+            //console.log(data);
+                //if(data=='cancel_friendship_request'){
                     setTimeout(()=>{
                         loading.classList.add('invis');
                         add.classList.remove('invis');
                     }, 500)
-                }
+               // }
             })
         });
+        //сервер должен присылать resp
+        let a = 0;
         acceptButton.addEventListener('click', event=>{
-            let resp = true
+            let resp = true;
             accept.classList.add('invis');
             loading.classList.remove('invis');
             socket.emit('resp_friendship_request', {name: `${nickName}`,
                                                       resp: resp});
-            socket.on('friendship_request_response', data => {
-                if(data == 'resp_friendship_request' && resp){
+            console.log('accept');
+            socket.on('resp_friendship_request', data => {
+            console.log(data);
+                a++;
+                console.log(a);
+                if(data){
                     setTimeout(()=>{
                     loading.classList.add('invis');
                     remove.classList.remove('invis');
+
+                    //добавление друга в панель
+                    let friendTemplate = document.querySelector('.nav-friends-item').cloneNode(true);
+                    let nickNameField = friendTemplate.querySelector('.nav-friends-item-nick').querySelector('span');
+                    let nickName = document.querySelector('.profile-main-ava-nickname-nick').innerHTML;
+                    nickNameField.innerHTML = nickName;
+                    friends.append(friendTemplate);
+
+                    //удаление уведомления о дружбе
+                    for(let element of document.querySelectorAll('.nav-notifications-item')){
+                        if(element.querySelector('.nav-notifications-item-nick').querySelector('span').innerHTML == nickName){
+                            notifications.removeChild(element);
+                        }
+                    }
                     }, 500);
                 }
             })
@@ -146,57 +204,120 @@ document.addEventListener('DOMContentLoaded', () => {
             loading.classList.remove('invis');
             socket.emit('resp_friendship_request', {name: `${nickName}`,
                                                       resp: resp});
-            socket.on('friendship_request_response', data => {
-                if(data == 'resp_friendship_request' && !resp)
+            socket.on('resp_friendship_request', data => {
+                console.log(data);
+                if(!data){
                     setTimeout(()=>{
                         loading.classList.add('invis');
                         add.classList.remove('invis');
-                    }, 500)
+
+                        //удаление уведомления о дружбе
+                        for(let element of document.querySelectorAll('.nav-notifications-item')){
+                            if(element.querySelector('.nav-notifications-item-nick').querySelector('span').innerHTML == nickName){
+                                notifications.removeChild(element);
+                            }
+                        }
+                        for(let element of document.querySelectorAll('.nav-notifications-item')){
+                            if(element.querySelector('.nav-notifications-item-nick').querySelector('span').innerHTML == nickName){
+                                notifications.removeChild(element);
+                            }
+                        }
+                    }, 500);
+                }
             })
         })
         remove.addEventListener('click', event=>{
             remove.classList.add('invis');
             socket.emit('delete_friendship',`${nickName}`);
             loading.classList.remove('invis');
-            socket.on('friendship_request_response', data => {
-            if(data == 'delete_friendship'){
+            socket.on('delete_friendship', data => {
+            //console.log(data);
+            //if(data == 'delete_friendship'){
                 setTimeout(()=>{
                     loading.classList.add('invis');
                     add.classList.remove('invis');
+                    //удаление друга в панели
+                        for(let element of document.querySelectorAll('.nav-friends-item')){
+                            if(element.querySelector('.nav-friends-item-nick').querySelector('span').innerHTML == nickName){
+                                friends.removeChild(element);
+                            }
+                        }
                 }, 500)
-            }
+            //}
             })
         })
     }
 
-
     socket.on('update_friendship_info', data => {
+        try {
+            var validationNick = document.querySelector('.profile-main-ava-nickname-nick').innerHTML;
+            console.log(2);
+        }
+        catch{var validationNick = false;
+        console.log(validationNick)}
         if(data['info_status'] == 'friend_notification'){
             let notificTemplate = document.querySelector('.nav-notifications-item').cloneNode(true);
             notificTemplate.style.display = 'grid';
             let nickNameField = notificTemplate.querySelector('.nav-notifications-item-nick').querySelector('span');
             nickNameField.innerHTML = `${data.name}`;
             notifications.append(notificTemplate);
-            add.classList.add('invis');
-            accept.classList.remove('invis');
+            if(validationNick == data.name){
+                add.classList.add('invis');
+                accept.classList.remove('invis');
+            }
         }
         else if(data['info_status'] == 'friends'){
-            cancel.classList.add('invis');
-            remove.classList.remove('invis');
+            if(validationNick == data.name){
+                cancel.classList.add('invis');
+                remove.classList.remove('invis');
+            }
+
+            //добавление уведомления о принятии друга
             let notificTemplate = document.querySelector('.nav-notifications-item-friend').cloneNode(true);
-            notificTemplate.style.display = 'flex';
+            notificTemplate.classList.remove('invis');
             let nickNameField = notificTemplate.querySelector('.nav-notifications-item-friend-online').querySelector('span');
             nickNameField.innerHTML = `${data.name} принял вашу заявку в друзья`;
+            notificTemplate.style.display = 'flex';
             notifications.append(notificTemplate);
+
+            //добавление друга в панель
+            let friendTemplate = document.querySelector('.nav-friends-item').cloneNode(true);
+            let nickNameFieldFr = friendTemplate.querySelector('.nav-friends-item-nick').querySelector('span');
+            nickNameFieldFr.innerHTML = `${data.name}`;
+            friends.append(friendTemplate);
         }
         else if(data['info_status'] == 'delete'){
-            remove.classList.add('invis');
-            add.classList.remove('invis');
+            if(validationNick == data.name){
+                remove.classList.add('invis');
+                add.classList.remove('invis');
+            }
+            //удаление друга в панели
+            for(let element of document.querySelectorAll('.nav-friends-item')){
+                if(element.querySelector('.nav-friends-item-nick').querySelector('span').innerHTML == data.name){
+                    friends.removeChild(element);
+                }
+            }
         }
         else if(data['info_status'] == 'reject'){
-            cancel.classList.add('invis');
-            add.classList.remove('invis');
+            if(validationNick == data.name){
+                cancel.classList.add('invis');
+                add.classList.remove('invis');
+            }
+        }
+        else if(data['info_status'] == 'cancel'){
+            if(validationNick == data.name){
+                accept.classList.add('invis');
+                add.classList.remove('invis');
+            }
+            for(let element of document.querySelectorAll('.nav-notifications-item')){
+                if(element.querySelector('.nav-notifications-item-nick').querySelector('span').innerHTML == data.name){
+                    notifications.removeChild(element);
+                }
+            }
         }
     })
 });
 
+//должен присылаться resp
+//отсылать на сервер действия
+//разобраться с проблемой сокетов

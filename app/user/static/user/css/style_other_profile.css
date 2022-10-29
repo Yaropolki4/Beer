@@ -564,7 +564,7 @@ body {
   grid-row-gap: 20px;
 }
 
-.wrapper .container .profile-main .profile-main-achievements .profile-main-achievements-icons .profile-main-achievements-icons-icon {
+.wrapper .container .profile-main .profile-main-achievements .profile-main-achievements-icons a .profile-main-achievements-icons-icon {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -572,14 +572,15 @@ body {
   width: 80px;
 }
 
-.wrapper .container .profile-main .profile-main-achievements .profile-main-achievements-icons .profile-main-achievements-icons-icon img {
+.wrapper .container .profile-main .profile-main-achievements .profile-main-achievements-icons a .profile-main-achievements-icons-icon img {
   width: 90%;
 }
 
-.wrapper .container .profile-main .profile-main-achievements .profile-main-achievements-icons .profile-main-achievements-icons-icon span {
+.wrapper .container .profile-main .profile-main-achievements .profile-main-achievements-icons a .profile-main-achievements-icons-icon span {
   display: block;
   margin-top: 8px;
   font-size: 10px;
+  color: orange;
 }
 
 .wrapper .container .profile-info {
